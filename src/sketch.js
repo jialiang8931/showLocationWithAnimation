@@ -20,7 +20,7 @@ function preload() {
 
 
 function setup() {
-  canvas = createCanvas(windowWidth, windowHeight*0.9);
+  canvas = createCanvas(windowWidth*0.99, windowHeight*0.9);
   myMap = mappa.tileMap(config);
   myMap.overlay(canvas);
   endP = createP("");
