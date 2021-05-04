@@ -50,6 +50,7 @@ function setup() {
 
   buttomStop.position(250, windowHeight*0.92);
   buttomStop.mousePressed(stopAnimation);
+  canvas.mousePressed(stopAnimation);
   frameRate(12)
 
 
@@ -61,7 +62,6 @@ let c = 0;
 function draw() {
   clear();
   drawCity();
-
 
   // This part is trying to plot the location of well.
   let totalDays = dataEvents.rows.length;
@@ -78,8 +78,6 @@ function draw() {
     fill(255, 255, 255, 255);
     strokeWeight(1);
     ellipse(pos.x, pos.y, 4, 4);
-
-
 
   // This part is trying to plot events.
     if (dataEvents.rows[days].get(dataEvents.columns[i]) === "1" ) {
@@ -155,7 +153,7 @@ function plotDateEvent(){
       ellipse(pos.x, pos.y, 30*sin(PI/2));
     }
   }
-
+  
  // Show the date of events.
   days = floor(c);
   date = new Date("1970-08-01")
@@ -169,8 +167,10 @@ function plotDateEvent(){
   endP.html("frameRate:　" + round(frameRate()) + ";　days：" + (days+1));
   buttomStop.html("PLAY");
   noLoop(); statusButtom = -1;
-
 }
+
+
+
 
 function stopAnimation(){
   statusButtom *= -1
@@ -183,5 +183,4 @@ function stopAnimation(){
     buttomStop.html("STOP");
     loop();
   }
-
 }
