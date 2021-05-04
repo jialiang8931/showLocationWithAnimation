@@ -28,7 +28,7 @@ function setup() {
   myMap = mappa.tileMap(config);
   myMap.overlay(canvas);
   endP = createP("");
-  dateP = createP("2016-06-01");
+  dateP = createP("1970-08-01");
   dateP.position(70, 0); 
   dateP.style("z-index", "100"); dateP.style("font-size", "30"); 
   dateP.style("background", "#ffffffa3"); 
@@ -99,7 +99,7 @@ function draw() {
   // Reset the date of events.
   if (c >= dataEvents.rows.length-1) {
     c = 0;
-    date = new Date("2016-06-01");
+    date = new Date("1970-08-01");
   }
 
   // Show the frame rate of window.
