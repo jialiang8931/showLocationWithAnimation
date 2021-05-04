@@ -10,7 +10,7 @@ let shpCity;
 let dataWells = [];
 let dataEvents;
 let infoWell;
-let date = new Date("2016-06-01")
+let date = new Date("1970-08-01")
 let plotDiameter;
 
 function preload() {
