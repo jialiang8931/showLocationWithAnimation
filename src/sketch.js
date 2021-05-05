@@ -9,7 +9,7 @@ let shpCity;
 
 let dataWells = [];
 let dataEvents;
-let infoWell;
+let dataVolume;
 let crop;
 let date = new Date("2016-06-01")
 let plotDiameter;
@@ -21,7 +21,7 @@ let statusButtom = 1;
 function preload() {
   config = loadJSON("./config/config.json");
   layerCity = loadJSON('./assets/layer/huwei-city.geojson');
-  dataWells = loadTable("./assets/layer/points.csv", 'header');
+  dataVolume = loadTable("./assets/data/volume.csv", 'header');
   dataEvents = loadTable("./assets/data/events.csv", 'header');
   console.log("Done!!!");
 }
@@ -92,7 +92,14 @@ function draw() {
     ellipse(pos.x, pos.y, 4, 4);
 
   // This part is trying to plot events.
-    if (dataEvents.rows[days].get(dataEvents.columns[i]) === "1" ) {
+    if (dataEvents.rows[days].get(dataEvents.columns[i]) >= "1" ) {
+      let diameter = Number(dataVolume.rows[days].get(dataVolume.columns[i]));
+      if (diameter <= 500){
+        diameter = map(diameter, 0.1, 500, 20, 100);
+      } else if (diameter > 500) {
+        diameter = 400;
+      }
+
       let well = dataEvents.columns[i].split(',');
       let x = Number(well[1]); 
       let y = Number(well[0]); 
@@ -105,7 +112,7 @@ function draw() {
         case 4 : fill( 255, 215,   0, 180); break; // Gold
         }
       strokeWeight(1);
-      ellipse(pos.x, pos.y, 30*sin(plotDiameter));
+      ellipse(pos.x, pos.y, diameter*sin(plotDiameter));
     }
 
   }
@@ -169,7 +176,14 @@ function plotDateEvent(){
     ellipse(pos.x, pos.y, 4, 4);
 
   // This part is trying to plot events.
-    if (dataEvents.rows[days].get(dataEvents.columns[i]) === "1" ) {
+    if (dataEvents.rows[days].get(dataEvents.columns[i]) >= "1" ) {
+      let diameter = Number(dataVolume.rows[days].get(dataVolume.columns[i]));
+      if (diameter <= 500){
+        diameter = map(diameter, 0.1, 500, 20, 100);
+      } else if (diameter > 500) {
+        diameter = 400;
+      }
+      
       let well = dataEvents.columns[i].split(',');
       let x = Number(well[1]); 
       let y = Number(well[0]); 
@@ -246,7 +260,14 @@ function changeDay1() {
     ellipse(pos.x, pos.y, 4, 4);
 
   // This part is trying to plot events.
-    if (dataEvents.rows[days].get(dataEvents.columns[i]) === "1" ) {
+    if (dataEvents.rows[days].get(dataEvents.columns[i]) >= "1" ) {
+      let diameter = Number(dataVolume.rows[days].get(dataVolume.columns[i]));
+      if (diameter <= 500){
+        diameter = map(diameter, 0.1, 500, 20, 100);
+      } else if (diameter > 500) {
+        diameter = 400;
+      }
+      
       let well = dataEvents.columns[i].split(',');
       let x = Number(well[1]); 
       let y = Number(well[0]); 
@@ -310,7 +331,14 @@ function changeDay2() {
     ellipse(pos.x, pos.y, 4, 4);
 
   // This part is trying to plot events.
-    if (dataEvents.rows[days].get(dataEvents.columns[i]) === "1" ) {
+    if (dataEvents.rows[days].get(dataEvents.columns[i]) >= "1" ) {
+      let diameter = Number(dataVolume.rows[days].get(dataVolume.columns[i]));
+      if (diameter <= 500){
+        diameter = map(diameter, 0.1, 500, 20, 100);
+      } else if (diameter > 500) {
+        diameter = 400;
+      }
+      
       let well = dataEvents.columns[i].split(',');
       let x = Number(well[1]); 
       let y = Number(well[0]); 
