@@ -10,11 +10,13 @@ let shpCity;
 let dataWells = [];
 let dataEvents;
 let infoWell;
-let date = new Date("1970-08-01")
+let crop;
+let date = new Date("2016-06-01")
 let plotDiameter;
 let sliderDate, sliderP;
 let buttomStop, buttomMove, buttomBack;
 let statusButtom = 1;
+
 
 function preload() {
   config = loadJSON("./config/config.json");
@@ -30,12 +32,12 @@ function setup() {
   myMap = mappa.tileMap(config);
   myMap.overlay(canvas);
   sliderDate = createSlider(0, dataEvents.rows.length-1, 0);
-  sliderP = createP("1970-08-01");
+  sliderP = createP("2016-06-01");
   buttomStop = createButton("STOP");
   buttomMove = createButton("＋");
   buttomBack = createButton("－");
   endP = createP("");
-  dateP = createP("1970-08-01");
+  dateP = createP("2016-06-01");
   dateP.position(70, 0); 
   dateP.style("z-index", "100"); dateP.style("font-size", "30"); 
   dateP.style("background", "#ffffffa3"); 
@@ -95,7 +97,13 @@ function draw() {
       let x = Number(well[1]); 
       let y = Number(well[0]); 
       let pos = myMap.latLngToPixel(y, x);
-      fill(0, 0, 255, 125);
+      crop = Number(well[2]);
+      switch (crop) {
+        case 1 : fill(  30, 144, 255, 180); break; // Dodger blue
+        case 2 : fill(  85, 107,  47, 180); break; // Dark Olive Green
+        case 3 : fill( 255, 105, 180, 180); break; // Hot Pink
+        case 4 : fill( 255, 215,   0, 180); break; // Gold
+        }
       strokeWeight(1);
       ellipse(pos.x, pos.y, 30*sin(plotDiameter));
     }
@@ -122,11 +130,13 @@ function draw() {
   // Reset the date of events.
   if (c >= dataEvents.rows.length-1) {
     c = 0;
-    date = new Date("1970-08-01");
+    date = new Date("2016-06-01");
   }
 
   // Show the frame rate of window.
   endP.html("frameRate:　" + round(frameRate()) + ";　days：" + (days+1));
+  drawLegend();
+
 }
 
 
@@ -144,7 +154,13 @@ function plotDateEvent(){
     let x = Number(well[1]); 
     let y = Number(well[0]); 
     let pos = myMap.latLngToPixel(y, x);
-    fill(0, 0, 0, 255);
+    crop = Number(well[2]);
+      switch (crop) {
+        case 1 : fill(  30, 144, 255, 180); break; // Dodger blue
+        case 2 : fill(  85, 107,  47, 180); break; // Dark Olive Green
+        case 3 : fill( 255, 105, 180, 180); break; // Hot Pink
+        case 4 : fill( 255, 215,   0, 180); break; // Gold
+        }
     strokeWeight(1);
     ellipse(pos.x, pos.y, 6, 6);
 
@@ -166,7 +182,7 @@ function plotDateEvent(){
   
  // Show the date of events.
   days = floor(c);
-  date = new Date("1970-08-01")
+  date = new Date("2016-06-01")
   date.setDate(date.getDate() + days);
   let M = date.getMonth()+1 >= 10 ? date.getMonth()+1 : "0" + (date.getMonth()+1);
   let D = date.getDate() >= 10 ? date.getDate() : "0" + date.getDate();
@@ -176,7 +192,9 @@ function plotDateEvent(){
   // Show the frame rate of window.
   endP.html("frameRate:　" + round(frameRate()) + ";　days：" + (days+1));
   buttomStop.html("PLAY");
+  drawLegend();
   noLoop(); statusButtom = -1;
+
 }
 
 
@@ -213,7 +231,13 @@ function changeDay1() {
     let x = Number(well[1]); 
     let y = Number(well[0]); 
     let pos = myMap.latLngToPixel(y, x);
-    fill(0, 0, 0, 255);
+    crop = Number(well[2]);
+      switch (crop) {
+        case 1 : fill(  30, 144, 255, 180); break; // Dodger blue
+        case 2 : fill(  85, 107,  47, 180); break; // Dark Olive Green
+        case 3 : fill( 255, 105, 180, 180); break; // Hot Pink
+        case 4 : fill( 255, 215,   0, 180); break; // Gold
+        }
     strokeWeight(1);
     ellipse(pos.x, pos.y, 6, 6);
 
@@ -227,14 +251,20 @@ function changeDay1() {
       let x = Number(well[1]); 
       let y = Number(well[0]); 
       let pos = myMap.latLngToPixel(y, x);
-      fill(0, 0, 255, 125);
+      crop = Number(well[2]);
+        switch (crop) {
+          case 1 : fill(  30, 144, 255, 180); break; // Dodger blue
+          case 2 : fill(  85, 107,  47, 180); break; // Dark Olive Green
+          case 3 : fill( 255, 105, 180, 180); break; // Hot Pink
+          case 4 : fill( 255, 215,   0, 180); break; // Gold
+          }
       strokeWeight(1);
       ellipse(pos.x, pos.y, 30*sin(PI/2));
     }
   }
   
  // Show the date of events.
-  date = new Date("1970-08-01")
+  date = new Date("2016-06-01")
   date.setDate(date.getDate() + days);
   let M = date.getMonth()+1 >= 10 ? date.getMonth()+1 : "0" + (date.getMonth()+1);
   let D = date.getDate() >= 10 ? date.getDate() : "0" + date.getDate();
@@ -244,6 +274,7 @@ function changeDay1() {
   // Show the frame rate of window.
   endP.html("frameRate:　" + round(frameRate()) + ";　days：" + (days+1));
   buttomStop.html("PLAY");
+  drawLegend();
   noLoop(); statusButtom = -1;
 }
 
@@ -264,7 +295,13 @@ function changeDay2() {
     let x = Number(well[1]); 
     let y = Number(well[0]); 
     let pos = myMap.latLngToPixel(y, x);
-    fill(0, 0, 0, 255);
+    crop = Number(well[2]);
+      switch (crop) {
+        case 1 : fill(  30, 144, 255, 180); break; // Dodger blue
+        case 2 : fill(  85, 107,  47, 180); break; // Dark Olive Green
+        case 3 : fill( 255, 105, 180, 180); break; // Hot Pink
+        case 4 : fill( 255, 215,   0, 180); break; // Gold
+        }
     strokeWeight(1);
     ellipse(pos.x, pos.y, 6, 6);
 
@@ -278,14 +315,20 @@ function changeDay2() {
       let x = Number(well[1]); 
       let y = Number(well[0]); 
       let pos = myMap.latLngToPixel(y, x);
-      fill(0, 0, 255, 125);
+      crop = Number(well[2]);
+        switch (crop) {
+          case 1 : fill(  30, 144, 255, 180); break; // Dodger blue
+          case 2 : fill(  85, 107,  47, 180); break; // Dark Olive Green
+          case 3 : fill( 255, 105, 180, 180); break; // Hot Pink
+          case 4 : fill( 255, 215,   0, 180); break; // Gold
+        }
       strokeWeight(1);
       ellipse(pos.x, pos.y, 30*sin(PI/2));
     }
   }
   
  // Show the date of events.
-  date = new Date("1970-08-01")
+  date = new Date("2016-06-01")
   date.setDate(date.getDate() + days);
   let M = date.getMonth()+1 >= 10 ? date.getMonth()+1 : "0" + (date.getMonth()+1);
   let D = date.getDate() >= 10 ? date.getDate() : "0" + date.getDate();
@@ -295,5 +338,51 @@ function changeDay2() {
   // Show the frame rate of window.
   endP.html("frameRate:　" + round(frameRate()) + ";　days：" + (days+1));
   buttomStop.html("PLAY");
+  drawLegend();
   noLoop(); statusButtom = -1;
+}
+
+
+
+function drawLegend() {
+  let offset = 20;
+  let offsetText = 7;
+  let offsetMig = 16;
+  let refPx = 25;
+  let refPy = height - 116;
+
+  stroke(0, 200);
+  fill( 255, 180);
+  rect( refPx-20, refPy-18, 140, 126);
+
+  textSize(20);
+  textStyle(BOLD);
+  stroke(255);
+  fill(0);
+  text('LEGEND', refPx-18, refPy - 22 + offset*0);
+
+  textSize(16);
+  textStyle(NORMAL);
+  stroke(0);
+  strokeWeight(0.1);
+  
+  text('PADDY', refPx+offsetMig, refPy + offset*0+ offsetText);
+  text('DROUGHT', refPx+offsetMig, refPy + offset*1.5+ offsetText);
+  text('VEGETABLE', refPx+offsetMig, refPy + offset*3+ offsetText);
+  text('ROTATION', refPx+offsetMig, refPy + offset*4.5+offsetText);
+
+  stroke(0, 180);
+  strokeWeight(1);
+  fill(  30, 144, 255, 180); // Dodger blue
+  ellipse(refPx, refPy+offset*0, 20*sin(PI/2));
+
+  fill(  85, 107,  47, 180); // Dark Olive Green
+  ellipse(refPx, refPy+offset*1.5, 20*sin(PI/2));
+
+  fill( 255, 105, 180, 180); // Hot Pink
+  ellipse(refPx, refPy+offset*3.0, 20*sin(PI/2));
+
+  fill( 255, 215,   0, 180); // Gold
+  ellipse(refPx, refPy+offset*4.5, 20*sin(PI/2));
+
 }
