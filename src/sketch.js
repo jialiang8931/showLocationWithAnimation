@@ -190,7 +190,7 @@ function plotDateEvent(){
       let pos = myMap.latLngToPixel(y, x);
       fill(0, 0, 255, 125);
       strokeWeight(1);
-      ellipse(pos.x, pos.y, 30*sin(PI/2));
+      ellipse(pos.x, pos.y, diameter*sin(PI/2));
     }
   }
   
@@ -280,7 +280,7 @@ function changeDay1() {
           case 4 : fill( 255, 215,   0, 180); break; // Gold
           }
       strokeWeight(1);
-      ellipse(pos.x, pos.y, 30*sin(PI/2));
+      ellipse(pos.x, pos.y, diameter*sin(PI/2));
     }
   }
   
@@ -351,7 +351,7 @@ function changeDay2() {
           case 4 : fill( 255, 215,   0, 180); break; // Gold
         }
       strokeWeight(1);
-      ellipse(pos.x, pos.y, 30*sin(PI/2));
+      ellipse(pos.x, pos.y, diameter*sin(PI/2));
     }
   }
   
